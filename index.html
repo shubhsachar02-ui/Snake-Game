@@ -32,10 +32,29 @@ h1{font-size:clamp(26px,7vw,38px);margin:12px 0;color:#d6f4a4}
 .buttons{display:grid;gap:10px;margin-top:20px}
 .buttons button{width:100%}
 .tiny{font-size:10px;color:#7e8c78;line-height:1.6;margin-top:16px}
-#checkout .panel{background:#f4f7ef;color:#182217;border-color:#a4b68e;text-align:left}
-#checkout h2{margin:10px 0 18px;font-size:24px}
-.rowline{display:flex;justify-content:space-between;border-bottom:1px solid #d8dfd0;padding:12px 0;font-size:14px}
-.checkout-note{font-size:12px;line-height:1.6;color:#4c5a47}
+#checkout .panel{background:#f8fafc;color:#172033;border:1px solid #dbe2ea;text-align:left;padding:0;overflow:hidden}
+.checkout-head{padding:20px 22px;background:#fff;border-bottom:1px solid #e5eaf0;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.paybrand{font-family:Arial,sans-serif;font-weight:900;letter-spacing:-.04em;font-size:20px;color:#152238}
+.demo-pill{font:700 10px ui-monospace,monospace;letter-spacing:.08em;background:#fff4d6;color:#805900;border:1px solid #f2d58a;padding:6px 8px;border-radius:99px;white-space:nowrap}
+.checkout-body{padding:22px}
+#checkout h2{margin:0 0 5px;font-size:24px;color:#172033}
+.checkout-sub{font:13px Arial,sans-serif;color:#64748b;margin:0 0 20px}
+.merchant-row{display:flex;align-items:center;gap:12px;padding:14px;background:#fff;border:1px solid #e1e7ef;border-radius:12px;margin-bottom:18px}
+.merchant-icon{width:42px;height:42px;border-radius:10px;background:#e8f4d0;color:#284b13;display:grid;place-items:center;font-size:22px;font-weight:900}
+.merchant-meta{flex:1;font:13px Arial,sans-serif;line-height:1.45}
+.merchant-meta strong{display:block;font-size:14px;color:#172033}
+.merchant-meta span{color:#64748b}
+.rowline{display:flex;justify-content:space-between;gap:12px;border-bottom:1px solid #e5eaf0;padding:12px 0;font:14px Arial,sans-serif;color:#475569}
+.rowline strong{color:#172033}
+.rowline.total{border-bottom:0;font-size:16px;padding-top:16px}
+.checkout-note{font:12px/1.55 Arial,sans-serif;color:#64748b;background:#eef4e6;border-radius:9px;padding:11px;margin:16px 0 0}
+.pay-options{display:flex;gap:8px;margin:16px 0 4px}
+.pay-option{flex:1;border:1px solid #cbd5e1;border-radius:9px;background:#fff;color:#334155;padding:10px 4px;font:12px Arial,sans-serif;text-align:center}
+.pay-option.active{border:2px solid #315e19;background:#f4faec;color:#234410}
+#checkout .buttons{margin-top:16px}
+#checkout .primary{background:#315e19;color:#fff;box-shadow:0 3px 0 #203e10}
+#checkout .secondary{background:#fff;color:#334155;border:1px solid #cbd5e1}
+.secureline{font:11px Arial,sans-serif;color:#64748b;text-align:center;margin:12px 0 0}
 #reveal .panel{border-color:#9bbc0f}
 @media(max-width:360px){.shell{padding:10px}.screen{padding:8px}.controls{gap:6px}.dpad{grid-template-columns:42px 42px 42px}}
 </style>
@@ -76,15 +95,31 @@ h1{font-size:clamp(26px,7vw,38px);margin:12px 0;color:#d6f4a4}
 
 <div class="overlay" id="checkout" role="dialog" aria-modal="true" aria-labelledby="checkout-title">
   <div class="panel">
-    <div class="warning">DEMO CHECKOUT</div>
-    <h2 id="checkout-title">Payment summary</h2>
-    <div class="rowline"><span>Snake Game Fine</span><strong>₹500.00</strong></div>
-    <div class="rowline"><span>Convenience fee</span><span>₹0.00</span></div>
-    <div class="rowline"><strong>Total</strong><strong>₹500.00</strong></div>
-    <p class="checkout-note">This is a visual demo, not a real payment gateway. No UPI ID, card details, or payment credentials are requested or collected.</p>
-    <div class="buttons">
-      <button class="primary" id="payDemo">SIMULATE PAYMENT</button>
-      <button class="secondary" id="backBtn">GO BACK</button>
+    <div class="checkout-head">
+      <div class="paybrand">pay<span style="color:#5a8d2b">desk</span></div>
+    </div>
+    <div class="checkout-body">
+      <h2 id="checkout-title">Complete your payment</h2>
+      <p class="checkout-sub">Review the order details below.</p>
+      <div class="merchant-row">
+        <div class="merchant-icon">S</div>
+        <div class="merchant-meta"><strong>Snake '98 Arcade</strong><span>Game over fee · Order #SN98-0500</span></div>
+        <strong>₹500.00</strong>
+      </div>
+      <div class="rowline"><span>Subtotal</span><strong>₹500.00</strong></div>
+      <div class="rowline"><span>Platform fee</span><span>₹0.00</span></div>
+      <div class="rowline total"><strong>Total payable</strong><strong>₹500.00</strong></div>
+      <div class="pay-options">
+        <div class="pay-option active">▦ UPI</div>
+        <div class="pay-option">▤ Card</div>
+        <div class="pay-option">▣ Netbanking</div>
+      </div>
+      <p class="checkout-note"><strong>Demo only.</strong> This is a fictional checkout screen, not a payment provider. No money is collected and no bank, UPI, or card details should be entered.</p>
+      <div class="buttons">
+        <button class="primary" id="payDemo">CONTINUE · ₹500.00</button>
+        <button class="secondary" id="backBtn">CANCEL PAYMENT</button>
+      </div>
+      <p class="secureline">▣ Secure checkout preview · No transaction will occur</p>
     </div>
   </div>
 </div>
@@ -104,7 +139,28 @@ h1{font-size:clamp(26px,7vw,38px);margin:12px 0;color:#d6f4a4}
  const scoreEl=document.getElementById('score'),hiEl=document.getElementById('hi'),statusEl=document.getElementById('status');
  const over=document.getElementById('gameover'),checkout=document.getElementById('checkout'),reveal=document.getElementById('reveal');
  let snake,food,dir,nextDir,score,hi=0,timer=null,running=false,ended=false;
+ let soundMuted=false, soundTimer=null, audioCtx=null;
  hiEl.textContent=String(hi).padStart(3,'0');
+ function playFunnySound(){
+   if(soundMuted) return;
+   try {
+     audioCtx = audioCtx || new (window.AudioContext || window.webkitAudioContext)();
+     if(audioCtx.state === 'suspended') audioCtx.resume();
+     const now = audioCtx.currentTime;
+     // Short cartoon "wah-wah" buzzer, no external audio or downloads.
+     [0,0.22,0.44].forEach((offset,i)=>{
+       const osc=audioCtx.createOscillator(), gain=audioCtx.createGain();
+       osc.type='square';
+       osc.frequency.setValueAtTime(i===2?180:330,now+offset);
+       osc.frequency.exponentialRampToValueAtTime(95,now+offset+0.18);
+       gain.gain.setValueAtTime(0.0001,now+offset);
+       gain.gain.exponentialRampToValueAtTime(0.12,now+offset+0.02);
+       gain.gain.exponentialRampToValueAtTime(0.0001,now+offset+0.2);
+       osc.connect(gain); gain.connect(audioCtx.destination);
+       osc.start(now+offset); osc.stop(now+offset+0.21);
+     });
+   } catch(e) {}
+ }
  function reset(){clearInterval(timer);snake=[{x:7,y:10},{x:6,y:10},{x:5,y:10}];dir={x:1,y:0};nextDir={x:1,y:0};score=0;running=false;ended=false;scoreEl.textContent='000';statusEl.textContent='PRESS START';placeFood();draw();over.classList.remove('show');checkout.classList.remove('show');reveal.classList.remove('show')}
  function placeFood(){do{food={x:Math.floor(Math.random()*cells),y:Math.floor(Math.random()*cells)}}while(snake&&snake.some(p=>p.x===food.x&&p.y===food.y))}
  function draw(){ctx.fillStyle='#9bbc0f';ctx.fillRect(0,0,320,320);
@@ -116,7 +172,7 @@ h1{font-size:clamp(26px,7vw,38px);margin:12px 0;color:#d6f4a4}
    if(head.x<0||head.y<0||head.x>=cells||head.y>=cells||snake.some(p=>p.x===head.x&&p.y===head.y)){gameOver();return}
    snake.unshift(head);if(head.x===food.x&&head.y===food.y){score+=10;scoreEl.textContent=String(score).padStart(3,'0');if(score>hi){hi=score;hiEl.textContent=String(hi).padStart(3,'0')}placeFood()}else snake.pop();draw()
  }
- function gameOver(){running=false;ended=true;clearInterval(timer);statusEl.textContent='GAME OVER';over.classList.add('show')}
+ function gameOver(){running=false;ended=true;clearInterval(timer);statusEl.textContent='GAME OVER';over.classList.add('show');playFunnySound()}
  function setDir(name){if(!running)return;const dirs={up:{x:0,y:-1},down:{x:0,y:1},left:{x:-1,y:0},right:{x:1,y:0}};const d=dirs[name];if(!d)return;if(d.x===-dir.x&&d.y===-dir.y)return;nextDir=d}
  document.getElementById('start').addEventListener('click',start);
  document.querySelectorAll('[data-dir]').forEach(b=>b.addEventListener('click',()=>setDir(b.dataset.dir)));
